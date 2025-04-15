@@ -4,5 +4,5 @@ version = "0.1.0"
 entrypoint = "lib.typ"
 authors = ["Lars Aepler"]
 license = "GPLv3"
-description = "Check if a date is a german holiday"
+description = "Provide functions to work with German holidays"
 keywords = ["holiday", "datetime"]
