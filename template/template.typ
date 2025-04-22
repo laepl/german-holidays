@@ -5,7 +5,7 @@
 You can get a list of all German holidays for 2025 with
 ```typ #list-holidays(2025, fed-state: "all")```
 which returns a dictionary containing the names as keys and the dates as values: \
-// #list-holidays(2025, fed-state: "all")
+#list-holidays(2025, fed-state: "all")
 
 You can get the dates for all country-wide holidays by not specifying the state or passing `none`
 ```typ
@@ -25,4 +25,4 @@ For #mydate.display() #is-holiday(mydate) is returned, because it's #which-holid
 For #mydate2.display() #is-holiday(mydate2) is returned.
 
 #let mydate3 = datetime(year: 2025, month: 10, day: 31)
-The #mydate.display() is #which-holiday(mydate3, fed-state: "NI", lang: "en")
+The #mydate.display() is #which-holiday(mydate3, fed-state: "HH", lang: "en")

@@ -2,7 +2,7 @@
 #import "src/translations.typ": translate-day
 
 #let check-state(fed-state) = {
-  if fed-state == none or fed-state == "all" { return }
+  if fed-state == none or fed-state == "ALL" { return }
   let fed-states = (
     BB: "Brandenburg",
     BE: "Berlin",
@@ -20,8 +20,9 @@
     ST: "Sachsen-Anhalt",
     SH: "Schleswig-Holstein",
     TH: "Thüringen",
+    AB: "Augsburg"
   )
-  if fed-state not in fed-states.keys() and fed-state not in (none, "all") {
+  if fed-state not in fed-states.keys() {
     let msg = fed-state + " is no valid state abbreviation. Use one of these instead: "
     for element in fed-states {
       msg += element.at(0) + " = " + element.at(1) + ", "
@@ -31,6 +32,9 @@
 }
 
 #let list-holidays(year, fed-state: default-state, lang: default-lang) = {
+  if type(fed-state) == str {
+    fed-state = upper(fed-state)
+  }
   check-state(fed-state)
 
   let a = calc.rem(year, 19)
@@ -64,39 +68,39 @@
   )
 
   // Heilige Drei Könige
-  if fed-state in ("BW", "BY", "ST", "all") {
+  if fed-state in ("BW", "BY", "AB", "ST", "ALL") {
     holidays.insert(translate-day(2, lang: lang), datetime(year: year, month: 1, day: 6))
   }
   // Internationaler Frauentag
-  if fed-state in ("BE", "MV", "all") {
+  if fed-state in ("BE", "MV", "ALL") {
     holidays.insert(translate-day(3, lang: lang), datetime(year: year, month: 3, day: 8))
   }
   // Fronleichnam
-  if fed-state in ("BW", "BY", "HE", "MW", "RP", "SL", "SN", "TH", "all") {
+  if fed-state in ("BW", "BY", "AB", "HE", "MW", "RP", "SL", "SN", "TH", "ALL") {
     holidays.insert(translate-day(10, lang: lang), ostersonntag + duration(days: 60))
   }
   // Augsburger Friedensfest
-  if fed-state in ("Augsburg", "all") {
+  if fed-state in ("AB", "ALL") {
     holidays.insert(translate-day(11, lang: lang), datetime(year: year, month: 8, day: 8))
   }
   // Mariä Himmelfahrt
-  if fed-state in ("SL", "BY", "all") {
+  if fed-state in ("SL", "BY", "AB", "ALL") {
     holidays.insert(translate-day(12, lang: lang), datetime(year: year, month: 8, day: 15))
   }
   // Weltkindertag
-  if fed-state in ("TH", "all") {
+  if fed-state in ("TH", "ALL") {
     holidays.insert(translate-day(13, lang: lang), datetime(year: year, month: 9, day: 20))
   }
   // Reformationstag
-  if fed-state in ("BB", "HB", "HH", "MV", "NI", "SN", "ST", "SH", "TH", "all") {
+  if fed-state in ("BB", "HB", "HH", "MV", "NI", "SN", "ST", "SH", "TH", "ALL") {
     holidays.insert(translate-day(15, lang: lang), datetime(year: year, month: 10, day: 31))
   }
   // Allerheiligen
-  if fed-state in ("BW", "BY", "MW", "RP", "SL", "all") {
+  if fed-state in ("BW", "BY", "AB", "MW", "RP", "SL", "ALL") {
     holidays.insert(translate-day(16, lang: lang), datetime(year: year, month: 11, day: 1))
   }
   // Buß- und Bettag
-  if fed-state in ("SN", "all") {
+  if fed-state in ("SN", "ALL") {
     let bußBettag = datetime(year: year, month: 11, day: 23)
     while bußBettag.weekday() != 3 {
       bußBettag -= duration(days: 1)
