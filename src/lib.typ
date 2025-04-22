@@ -1,5 +1,5 @@
-#import "src/config.typ": default-state, default-lang
-#import "src/translations.typ": translate-day
+#import "config.typ": default-state, default-lang
+#import "translations.typ": translate-day
 
 #let check-state(fed-state) = {
   if fed-state == none or fed-state == "ALL" { return }
